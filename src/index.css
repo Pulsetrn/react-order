@@ -1,0 +1,17 @@
+:root {
+  --font: "Open Sans", sans-serif;
+  --primary-color: #fe724c;
+  --primary-hover-color: #df6442;
+  --primary-choosed-color: rgb(199, 162, 0);
+  --text-color: #000000;
+  --text-secondary-color: #5b5b5e;
+  --white-color: #ffffff;
+  --separator-color: #d4d6e0;
+  --card-color: rgb(231, 231, 231);
+  --link-color: rgb(0, 153, 255);
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  margin: 0;
+}
