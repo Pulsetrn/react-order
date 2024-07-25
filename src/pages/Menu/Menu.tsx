@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Header from "../../components/Header/Header";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import Search from "../../components/Search/Search";
-import { PREFIX } from "../../Helpers/API";
+import { PREFIX } from "../../helpers/API";
 import { Product } from "../../Interfaces/product.interface";
 import styles from "./Menu.module.css";
 import axios, { AxiosError } from "axios";
@@ -46,7 +46,11 @@ export function Menu() {
         <Search placeholder="Search by name or composition"></Search>
       </div>
       <div>
-        {error && <><h1>{error}</h1></>}
+        {error && (
+          <>
+            <h1>{error}</h1>
+          </>
+        )}
         {!loading && <MenuList products={products}></MenuList>}
         {loading && (
           <>

@@ -1,7 +1,10 @@
-import { NavLink, Outlet, useLocation } from "react-router-dom";
+import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import styles from "./Layout.module.css";
 import Button from "../../components/Button/Button";
 import cn from "classnames";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../storage/store";
+import { userActions } from "../../storage/user.slice";
 
 export function Layout() {
   // useLocation - хук, позволяющий отслеживать текущее местоположение с точки зрения URL.
@@ -10,6 +13,13 @@ export function Layout() {
   // useEffect(() => {
   //   console.log(location);
   // }, [location]);
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
+
+  function logout() {
+    dispatch(userActions.logout())
+    navigate("/auth/login")
+  }
 
   return (
     <div className={styles["layout"]}>
@@ -44,7 +54,7 @@ export function Layout() {
             Cart
           </NavLink>
         </div>
-        <Button className={styles["exit"]}>
+        <Button className={styles["exit"]} onClick={logout}>
           <img src="/exit-icon.svg" alt="" />
           Exit
         </Button>

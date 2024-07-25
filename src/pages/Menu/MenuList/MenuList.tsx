@@ -15,7 +15,6 @@ export function MenuList({ products }: MenuListProps) {
           title={product.name}
         />
       ))}
-      ;
     </div>
   );
 }

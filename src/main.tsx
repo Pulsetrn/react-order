@@ -8,18 +8,25 @@ import { Cart } from "./pages/Cart/Cart.tsx";
 import { Error } from "./pages/Error/Error.tsx";
 import { Layout } from "./layout/Layout/Layout.tsx";
 import { ProductPage } from "./pages/Product/ProductPage.tsx";
-import { PREFIX } from "./Helpers/API.ts";
+import { PREFIX } from "./helpers/API.ts";
 import axios from "axios";
 import { AuthLayout } from "./layout/Auth/AuthLayout.tsx";
 import { Login } from "./pages/Login/Login.tsx";
 import { Register } from "./pages/Register/Register.tsx";
+import { RequireAuth } from "./helpers/RequireAuth.tsx";
+import { Provider } from "react-redux";
+import { store } from "./storage/store.ts";
 
 // Конфигурация для router - массив объектов, каждый из которых представляет из себя конфигурацию пути и
 // компонента, который будет отображаться по этому пути
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout></Layout>,
+    element: (
+      <RequireAuth>
+        <Layout></Layout>
+      </RequireAuth>
+    ),
     children: [
       {
         path: "/",
@@ -74,6 +81,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <RouterProvider router={router}></RouterProvider>
+    <Provider store={store}>
+      <RouterProvider router={router}></RouterProvider>
+    </Provider>
   </React.StrictMode>
 );

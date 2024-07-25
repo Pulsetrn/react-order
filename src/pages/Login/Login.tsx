@@ -1,12 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import Header from "../../components/Header/Header";
 import Input from "../../components/Input/Input";
 import styles from "./Login.module.css";
-import { FormEvent, useState } from "react";
-import axios, { AxiosError } from "axios";
-import { PREFIX } from "../../Helpers/API";
-
+import { FormEvent, useEffect, useState } from "react";
+// import axios, { AxiosError } from "axios";
+// import { PREFIX } from "../../helpers/API";
+// import { LoginResponse } from "../../Interfaces/auth.interface";
+import { AppDispatch } from "../../storage/store";
+import { useDispatch, useSelector } from "react-redux";
+import { login, userActions } from "../../storage/user.slice";
+import { RootState } from "../../storage/store";
 export interface LoginForm {
   email: {
     value: string;
@@ -18,6 +22,15 @@ export interface LoginForm {
 
 export function Login() {
   const [error, setError] = useState<string | null>();
+  const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
+  const jwt = useSelector((state: RootState) => state.user.jwt);
+
+  useEffect(() => {
+    if (jwt) {
+      navigate("/");
+    }
+  }, [jwt, navigate]);
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -28,22 +41,21 @@ export function Login() {
   }
 
   async function sendLogin(email: string, password: string) {
-    try {
-      const { data } = await axios.post(
-        `https://purpleschool.ru/pizza-api-demo/auth/login`,
-        {
-          email,
-          password,
-        }
-      );
-      console.log(data);
-    } catch (err) {
-      if (err instanceof AxiosError) {
-        setError(err.response?.data.message[0]);
-      }
-      console.log(err);
-      return;
-    }
+    dispatch(login({email: email, password: password}));
+    // try {
+    //   const { data } = await axios.post<LoginResponse>(`${PREFIX}/auth/login`, {
+    //     email,
+    //     password,
+    //   });
+    //   dispatch(userActions.addJWT(data.access_token));
+    //   navigate("/");
+    // } catch (err) {
+    //   if (err instanceof AxiosError) {
+    //     setError(err.response?.data.message[0]);
+    //   }
+    //   console.log(err);
+    //   return;
+    // }
   }
 
   return (

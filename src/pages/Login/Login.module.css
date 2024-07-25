@@ -35,7 +35,7 @@
 
 .links a {
 	text-decoration: none;
-	color: var(--text-color);
+	color: var(--link-color);
 }
 
 .error {
