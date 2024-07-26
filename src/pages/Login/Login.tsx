@@ -3,7 +3,7 @@ import Button from "../../components/Button/Button";
 import Header from "../../components/Header/Header";
 import Input from "../../components/Input/Input";
 import styles from "./Login.module.css";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect } from "react";
 // import axios, { AxiosError } from "axios";
 // import { PREFIX } from "../../helpers/API";
 // import { LoginResponse } from "../../Interfaces/auth.interface";
@@ -11,6 +11,7 @@ import { AppDispatch } from "../../storage/store";
 import { useDispatch, useSelector } from "react-redux";
 import { login, userActions } from "../../storage/user.slice";
 import { RootState } from "../../storage/store";
+
 export interface LoginForm {
   email: {
     value: string;
@@ -21,10 +22,9 @@ export interface LoginForm {
 }
 
 export function Login() {
-  const [error, setError] = useState<string | null>();
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
-  const jwt = useSelector((state: RootState) => state.user.jwt);
+  const { jwt, loginErrorMessage: error } = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
     if (jwt) {
@@ -34,14 +34,14 @@ export function Login() {
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    setError(null);
+    dispatch(userActions.clearLoginError());
     const target = e.target as typeof e.target & LoginForm;
     const { email, password } = target;
     await sendLogin(email.value, password.value);
   }
 
   async function sendLogin(email: string, password: string) {
-    dispatch(login({email: email, password: password}));
+    dispatch(login({ email: email, password: password }));
     // try {
     //   const { data } = await axios.post<LoginResponse>(`${PREFIX}/auth/login`, {
     //     email,
@@ -61,7 +61,7 @@ export function Login() {
   return (
     <div className={styles["login"]}>
       <Header>Login</Header>
-      {error && <div className={styles["error"]}></div>}
+      {error && <div className={styles["error"]}>{error}</div>}
       <form className={styles["form"]} onSubmit={handleSubmit}>
         <div className={styles["field"]}>
           <label htmlFor="email">Email</label>
