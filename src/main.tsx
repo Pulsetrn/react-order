@@ -16,6 +16,7 @@ import { Register } from "./pages/Register/Register.tsx";
 import { RequireAuth } from "./helpers/RequireAuth.tsx";
 import { Provider } from "react-redux";
 import { store } from "./storage/store.ts";
+import { Success } from "./pages/Success/Success.tsx";
 
 // Конфигурация для router - массив объектов, каждый из которых представляет из себя конфигурацию пути и
 // компонента, который будет отображаться по этому пути
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Menu></Menu>,
+      },
+      {
+        path: "/success",
+        element: <Success></Success>,
       },
       {
         path: "/cart",
