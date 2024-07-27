@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import Header from "../../components/Header/Header";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import Search from "../../components/Search/Search";
@@ -13,8 +13,13 @@ export function Menu() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | undefined>();
+  const [filter, setFilter] = useState<string>("");
 
-  async function getProducts() {
+  useEffect(() => {
+    getProducts(filter)
+  }, [filter])
+
+  async function getProducts(name?: string) {
     try {
       setLoading(true);
       await new Promise<void>((resolve) => {
@@ -22,7 +27,11 @@ export function Menu() {
           resolve();
         }, 200);
       });
-      const { data } = await axios.get<Product[]>(`${PREFIX}/products`);
+      const { data } = await axios.get<Product[]>(`${PREFIX}/products`, {
+        params: {
+          name: name,
+        },
+      });
       setProducts(data);
       setLoading(false);
     } catch (err) {
@@ -35,15 +44,18 @@ export function Menu() {
     }
   }
 
-  useEffect(() => {
-    getProducts();
-  }, []);
+  function handleChange(event: ChangeEvent<HTMLInputElement>) {
+    setFilter(event.target.value);
+  }
 
   return (
     <>
       <div className={styles["head"]}>
         <Header>Menu</Header>
-        <Search placeholder="Search by name or composition"></Search>
+        <Search
+          placeholder="Search by name or composition"
+          onChange={handleChange}
+        ></Search>
       </div>
       <div>
         {error && (
@@ -51,7 +63,8 @@ export function Menu() {
             <h1>{error}</h1>
           </>
         )}
-        {!loading && <MenuList products={products}></MenuList>}
+        {!loading && products.length > 0 && <MenuList products={products}></MenuList>}
+        {!loading && products.length === 0 && <><h1>Not found</h1></>}
         {loading && (
           <>
             <h1>Loading products...</h1>
