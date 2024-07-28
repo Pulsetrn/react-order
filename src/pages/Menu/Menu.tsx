@@ -1,6 +1,5 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import Header from "../../components/Header/Header";
-import ProductCard from "../../components/ProductCard/ProductCard";
 import Search from "../../components/Search/Search";
 import { PREFIX } from "../../helpers/API";
 import { Product } from "../../Interfaces/product.interface";

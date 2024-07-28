@@ -87,7 +87,7 @@ export function Cart() {
             .reduce((acc, amount) => {
               acc += amount;
               return acc;
-            }, 0)}{" "}
+            }, 0)}
           $
         </div>
       </div>

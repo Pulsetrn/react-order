@@ -34,7 +34,7 @@ export function Layout() {
     <div className={styles["layout"]}>
       <div className={styles["sidebar"]}>
         <div className={styles["user"]}>
-          <img src="/avatar.png" alt="" className={styles["avatar"]} />
+          {/* <img src="/avatar.png" alt="" className={styles["avatar"]} /> */}
           <div className={styles["name"]}>{profile?.name}</div>
           <div className={styles["email"]}>{profile?.email}</div>
         </div>
