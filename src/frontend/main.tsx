@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-// import App from "./App.tsx";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Menu } from "./pages/Menu/Menu.tsx";
@@ -24,9 +23,9 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <RequireAuth>
+      // <RequireAuth>
         <Layout></Layout>
-      </RequireAuth>
+      // </RequireAuth>
     ),
     children: [
       {
@@ -44,7 +43,7 @@ const router = createBrowserRouter([
       /* 
       Используем двоеточие, чтобы указать, что тут используются параметры пути, которые можно получить 
       с использованием хука useParams уже непосредственно на страничке (компоненте), который
-      указан в качестве компонента, отображаемого при переход по данному пути
+      указан в качестве компонента, отображаемого при переход по данному пути 
       */
       {
         path: "/product/:id",

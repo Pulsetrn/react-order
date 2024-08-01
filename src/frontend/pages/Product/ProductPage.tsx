@@ -21,7 +21,7 @@ export function ProductPage() {
     <>
       <div className={styles["header"]}>
         <div className={styles["inner-header"]}>
-          <Link to="/">Back to menu</Link>
+          <Link to="/" className={styles["back-link"]}>Back to menu</Link>
           <Header>{data.name}</Header>
         </div>
         <Button appearence="small" onClick={handleClick}>

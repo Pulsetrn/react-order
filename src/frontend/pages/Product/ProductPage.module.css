@@ -101,6 +101,15 @@
   margin-bottom: 8px;
 }
 
+.back-link {
+  background-color: var(--primary-color);
+  text-decoration: none;
+  color: var(--white-color);
+  border-radius: 20px;
+  padding: 10px 25px;
+  margin-right: 20px;
+}
+
 .description {
   display: flex;
   gap: 50px;
@@ -108,3 +117,6 @@
   margin-top: 50px;
 }
 
+.star {
+  padding: 4px;
+}

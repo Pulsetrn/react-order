@@ -1,7 +1,7 @@
 .button {
 	font-family: inherit;
 	cursor: pointer;
-	transition: background 0.25s;
+	transition: background 0.4s;
 	border: none;
 	color: var(--white-color);
 	border-radius: 29px;
