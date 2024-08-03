@@ -21,9 +21,9 @@ export function Layout() {
 
   // В начале жизненного цикла компонента получаем с бекенда данные о профиле с использованием
   // лежащего в local storage JWT токена
-  useEffect(() => {
-    dispatch(getUserProfile());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getUserProfile());
+  // }, [dispatch]);
 
   function logout() {
     dispatch(userActions.logout());

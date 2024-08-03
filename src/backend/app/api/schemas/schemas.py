@@ -14,6 +14,7 @@ class Product(BaseModel):
 
 
 class ProductOut(BaseModel):
+    id: int
     name: str
     price: float
     ingredients: list[str] | None = None
