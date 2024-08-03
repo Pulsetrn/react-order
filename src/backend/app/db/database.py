@@ -1,7 +1,7 @@
 from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine, AsyncSession
 from sqlalchemy.orm import DeclarativeBase
 
-from app.core.config import settings
+from src.backend.app.core.config import settings
 
 
 engine = create_async_engine(settings.ASYNC_DATABASE_URL)
@@ -15,3 +15,4 @@ async def get_async_session():
 
 class Base(DeclarativeBase):
     pass
+

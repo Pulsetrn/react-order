@@ -15,8 +15,8 @@ export function Menu() {
   const [filter, setFilter] = useState<string>("");
 
   useEffect(() => {
-    getProducts(filter)
-  }, [filter])
+    getProducts(filter);
+  }, [filter]);
 
   async function getProducts(name?: string) {
     try {
@@ -31,6 +31,7 @@ export function Menu() {
           name: name,
         },
       });
+      console.log(data);
       setProducts(data);
       setLoading(false);
     } catch (err) {
@@ -62,8 +63,14 @@ export function Menu() {
             <h1>{error}</h1>
           </>
         )}
-        {!loading && products.length > 0 && <MenuList products={products}></MenuList>}
-        {!loading && products.length === 0 && <><h1>Not found</h1></>}
+        {!loading && products.length > 0 && (
+          <MenuList products={products}></MenuList>
+        )}
+        {!loading && products.length === 0 && (
+          <>
+            <h1>Not found</h1>
+          </>
+        )}
         {loading && (
           <>
             <h1>Loading products...</h1>
@@ -73,5 +80,3 @@ export function Menu() {
     </>
   );
 }
-
-

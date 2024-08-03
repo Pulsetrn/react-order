@@ -24,7 +24,7 @@ const router = createBrowserRouter([
     path: "/",
     element: (
       // <RequireAuth>
-        <Layout></Layout>
+      <Layout></Layout>
       // </RequireAuth>
     ),
     children: [
@@ -58,7 +58,7 @@ const router = createBrowserRouter([
         // loader - функция, которая будет отрабатывать перед тем, как зарендерить компонент
         // Чтобы получить результат функции в компоненте - использум useLoaderData()
         loader: async ({ params }) => {
-          const { data } = await axios.get(`${PREFIX}/products/${params.id}`);
+          const { data } = await axios.get(`${PREFIX}/product/${params.id}`);
           return data;
         },
       },
