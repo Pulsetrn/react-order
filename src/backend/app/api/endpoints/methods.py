@@ -1,5 +1,6 @@
-from src.backend.app.db.models import Product as ProductModel
-from src.backend.app.api.schemas.schemas import Product as ProductSchema
+from src.backend.app.db.models import Product as ProductModel, User as UserModel
+from src.backend.app.api.schemas.schemas import Product as ProductSchema, User as UserSchema, UserDB as UserDBSchema, \
+    UserDB
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 
@@ -41,3 +42,14 @@ async def read_product_by_id(product_id: int, db: AsyncSession) -> ProductModel:
         if 'ingredients' in product_dict:
             product_dict['ingredients'] = product_dict['ingredients'].split(',')
     return product_dict
+
+
+async def register_user(user: UserDBSchema, db: AsyncSession) -> UserSchema:
+    db_user = UserModel(**user.dict())
+    db.add(db_user)
+    await db.commit()
+    await db.refresh(db_user)
+    return db_user
+
+
+

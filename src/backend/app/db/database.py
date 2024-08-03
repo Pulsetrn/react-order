@@ -15,3 +15,4 @@ async def get_async_session():
 
 class Base(DeclarativeBase):
     pass
+

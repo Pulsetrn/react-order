@@ -20,3 +20,15 @@ class ProductOut(BaseModel):
     ingredients: list[str] | None = None
     image: str | None = None
     rating: float | None = None
+
+
+class UserDB(BaseModel):
+    username: str
+    email: str
+    password: str
+
+
+class User(BaseModel):
+    id: int
+    username: str
+    email: str

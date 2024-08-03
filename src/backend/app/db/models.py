@@ -11,3 +11,14 @@ class Product(Base):
     ingredients: Mapped[str] = mapped_column()
     image: Mapped[str | None] = mapped_column(nullable=True)
     rating: Mapped[float | None] = mapped_column(nullable=True)
+
+
+class User(Base):
+    __tablename__ = 'users'
+
+    id: Mapped[int] = mapped_column(primary_key=True, index=True, nullable=False)
+    username: Mapped[str] = mapped_column(index=True, nullable=False)
+    email: Mapped[str] = mapped_column(index=True, nullable=False)
+    password: Mapped[str] = mapped_column(index=True, nullable=False)
+
+
